@@ -1,15 +1,21 @@
 import { useState } from 'react';
 import { encode } from '../../utils/encode';
+import { useFirebase } from '../services/firebase';
 
 function EncodeTester() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [encoded, setEncoded] = useState('');
 
+  const { users, secrets } = useFirebase();
+
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setEncoded(encode(email, password));
   };
+
+  console.log('users', users);
+  console.log('secrets', secrets);
 
   return (
     <div>
