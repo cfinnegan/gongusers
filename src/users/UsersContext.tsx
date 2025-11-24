@@ -1,9 +1,20 @@
-import { useEffect, useState } from 'react';
+import { createContext, useContext, useEffect, useState } from 'react';
 import type { Secrets, User } from '../types/users';
 
+// TODO: move to a config file
 const firebaseUrl = 'https://gongfetest.firebaseio.com/.json';
 
-export const useUsers = () => {
+const UsersContext = createContext<{
+  users: User[];
+  secrets: Secrets;
+  lookupUser: (
+    secret: string,
+    users: User[],
+    secrets: Secrets
+  ) => User | undefined;
+}>({ users: [], secrets: {}, lookupUser: () => undefined });
+
+export const UsersProvider = ({ children }: { children: React.ReactNode }) => {
   const [users, setUsers] = useState<User[]>([]);
   const [secrets, setSecrets] = useState<Secrets>({});
 
@@ -24,5 +35,11 @@ export const useUsers = () => {
     fetchData();
   }, []);
 
-  return { users, secrets, lookupUser };
+  return (
+    <UsersContext.Provider value={{ users, secrets, lookupUser }}>
+      {children}
+    </UsersContext.Provider>
+  );
 };
+
+export const useUsers = () => useContext(UsersContext);

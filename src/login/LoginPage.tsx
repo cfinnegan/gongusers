@@ -1,13 +1,14 @@
 import { useState } from 'react';
 import { encode } from '../../utils/encode';
-import type { Secrets, User } from '../types/users';
-import { lookupUser } from '../auth/utils';
 import { useAuth } from '../auth/AuthContext';
+import { lookupUser } from '../auth/utils';
+import { useUsers } from '../users/UsersContext';
 
-function LoginForm({ users, secrets }: { users: User[]; secrets: Secrets }) {
+function LoginPage() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [attemptedLogin, setAttemptedLogin] = useState(false);
+  const { users, secrets } = useUsers();
 
   const { user, setUser, logout } = useAuth();
 
@@ -56,4 +57,4 @@ function LoginForm({ users, secrets }: { users: User[]; secrets: Secrets }) {
   );
 }
 
-export default LoginForm;
+export default LoginPage;
