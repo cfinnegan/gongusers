@@ -3,7 +3,7 @@ import type { Secrets, User } from '../types/users';
 
 const firebaseUrl = 'https://gongfetest.firebaseio.com/.json';
 
-export const useFirebase = () => {
+export const useUsers = () => {
   const [users, setUsers] = useState<User[]>([]);
   const [secrets, setSecrets] = useState<Secrets>({});
 
@@ -14,9 +14,15 @@ export const useFirebase = () => {
     setSecrets(data.secrets);
   };
 
+  const lookupUser = (secret: string, users: User[], secrets: Secrets) => {
+    const userId = secrets[secret];
+    const user = users.find((user) => user.id === userId);
+    return user;
+  };
+
   useEffect(() => {
     fetchData();
   }, []);
 
-  return { users, secrets };
+  return { users, secrets, lookupUser };
 };
