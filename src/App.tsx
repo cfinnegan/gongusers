@@ -1,8 +1,11 @@
 import './App.css';
-import EncodeTester from './test/EncodeTester';
+import LoginForm from './login/LoginForm';
+import { useFirebase } from './services/firebase';
 
 function App() {
-  return <EncodeTester />;
+  const { users, secrets } = useFirebase();
+
+  return <LoginForm users={users} secrets={secrets} />;
 }
 
 export default App;

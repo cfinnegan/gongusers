@@ -1,21 +1,21 @@
 import { useState } from 'react';
 import { encode } from '../../utils/encode';
-import { useFirebase } from '../services/firebase';
+import type { Secrets, User } from '../types/users';
+import { lookupUser } from '../services/auth';
 
-function EncodeTester() {
+function LoginForm({ users, secrets }: { users: User[]; secrets: Secrets }) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [encoded, setEncoded] = useState('');
-
-  const { users, secrets } = useFirebase();
+  const [secret, setSecret] = useState('');
+  const [user, setUser] = useState<User | null>(null);
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    setEncoded(encode(email, password));
+    const encoded = encode(email, password);
+    setSecret(encoded);
+    const user = lookupUser(encoded, users, secrets);
+    setUser(user || null);
   };
-
-  console.log('users', users);
-  console.log('secrets', secrets);
 
   return (
     <div>
@@ -34,9 +34,15 @@ function EncodeTester() {
         />
         <button type="submit">Encode</button>
       </form>
-      {encoded && <div>Encoded: {encoded}</div>}
+      {secret && user && (
+        <div>
+          User: {user?.firstName} {user?.lastName}
+          <pre>{JSON.stringify(user, null, 2)}</pre>
+        </div>
+      )}
+      {secret && !user && <div>User not found</div>}
     </div>
   );
 }
 
-export default EncodeTester;
+export default LoginForm;
