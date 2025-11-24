@@ -1,4 +1,5 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { encode } from '../../utils/encode';
 import { useAuth } from '../auth/AuthContext';
 import { lookupUser } from '../auth/utils';
@@ -9,8 +10,15 @@ function LoginPage() {
   const [password, setPassword] = useState('');
   const [attemptedLogin, setAttemptedLogin] = useState(false);
   const { users, secrets } = useUsers();
+  const navigate = useNavigate();
 
   const { user, setUser, logout } = useAuth();
+
+  useEffect(() => {
+    if (user) {
+      navigate('/users');
+    }
+  }, [user, navigate]);
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
