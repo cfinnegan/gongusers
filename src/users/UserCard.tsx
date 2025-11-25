@@ -3,6 +3,7 @@ import ProfileImage from '../components/profile/ProfileImage';
 import ProfileName from '../components/profile/ProfileName';
 import ProfileEmail from '../components/profile/ProfileEmail';
 import ProfileIndicator from '../components/profile/ProfileIndicator';
+import MissingManager from '../components/profile/MissingManager';
 
 const UserCard = ({ user }: { user: UserNode }) => {
   return (
@@ -21,6 +22,7 @@ const UserCard = ({ user }: { user: UserNode }) => {
       <ProfileImage user={user} />
       <ProfileName user={user} />
       <ProfileEmail user={user} />
+      <MissingManager user={user} />
     </div>
   );
 };
