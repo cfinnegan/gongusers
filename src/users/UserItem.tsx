@@ -8,11 +8,22 @@ import {
   AccordionContent,
 } from '@/components/ui/accordion';
 
-const UserItem = ({ user }: { user: UserNode }) => {
+interface UserItemProps {
+  user: UserNode;
+  isExpanded?: (id: number) => boolean;
+  onToggle?: (id: number) => void;
+}
+
+const UserItem = ({ user, isExpanded, onToggle }: UserItemProps) => {
   const hasReports = (user.reports?.length ?? 0) > 0;
 
   return (
-    <UserAccordion userId={user.id} hasReports={hasReports}>
+    <UserAccordion
+      userId={user.id}
+      hasReports={hasReports}
+      expanded={isExpanded?.(user.id) ?? false}
+      onToggle={() => onToggle?.(user.id)}
+    >
       <AccordionItem value={`user-${user.id}`} className="border-none">
         <AccordionTrigger
           style={{
@@ -26,7 +37,11 @@ const UserItem = ({ user }: { user: UserNode }) => {
         </AccordionTrigger>
         {hasReports && (
           <AccordionContent className="pt-0">
-            <UserList users={user.reports} />
+            <UserList
+              users={user.reports}
+              isExpanded={isExpanded}
+              onToggle={onToggle}
+            />
           </AccordionContent>
         )}
       </AccordionItem>

@@ -8,13 +8,15 @@ Loop over all users:
 
 export const buildTree = (
   users: User[]
-): { tree: UserNode[]; totalCount: number } => {
+): { tree: UserNode[]; totalCount: number; allUserIds: number[] } => {
   const userMap: { [key: number]: UserNode } = {};
   const userTree: UserNode[] = [];
+  const allUserIds: number[] = [];
 
   // Build the user map and initialize reports array
   for (const user of users) {
     userMap[user.id] = { ...user, reports: [], managerStatus: 'unchecked' };
+    allUserIds.push(user.id);
   }
 
   // Build the hierarchy
@@ -40,5 +42,5 @@ export const buildTree = (
 
   const totalCount = Object.keys(userMap).length;
 
-  return { tree: userTree, totalCount };
+  return { tree: userTree, totalCount, allUserIds };
 };
