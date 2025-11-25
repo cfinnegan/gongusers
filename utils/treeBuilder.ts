@@ -6,7 +6,9 @@ Loop over all users:
 - and create a new data structure where each user ID has a 'reports' array
 */
 
-export const buildTree = (users: User[]): UserNode[] => {
+export const buildTree = (
+  users: User[]
+): { tree: UserNode[]; totalCount: number } => {
   const userMap: { [key: number]: UserNode } = {};
   const userTree: UserNode[] = [];
 
@@ -36,5 +38,7 @@ export const buildTree = (users: User[]): UserNode[] => {
     }
   }
 
-  return userTree;
+  const totalCount = Object.keys(userMap).length;
+
+  return { tree: userTree, totalCount };
 };
