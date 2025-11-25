@@ -7,8 +7,6 @@ function UsersPage() {
   const { users } = useUsers();
   const tree = useMemo(() => buildTree(users), [users]);
 
-  console.log('tree', tree);
-
   return (
     <div>
       <div> Users Page </div>

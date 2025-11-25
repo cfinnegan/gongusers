@@ -16,7 +16,6 @@ function ProfileImage({ user }: { user: User | null }) {
   const showImage = hasPhoto && !imageError;
   const showInitials = !hasPhoto || imageError || !imageLoaded;
 
-  // Mock component - will be replaced with shadcn later
   return (
     <div
       style={{
@@ -58,11 +57,6 @@ function ProfileImage({ user }: { user: User | null }) {
               const img = e.currentTarget;
               // Check if image is too small (less than 32px in either dimension)
               if (img.naturalWidth < 32 || img.naturalHeight < 32) {
-                console.log(
-                  '\nimage is too small',
-                  img.naturalWidth,
-                  img.naturalHeight
-                );
                 setImageError(true);
               } else {
                 setImageLoaded(true);

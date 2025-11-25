@@ -10,7 +10,6 @@ function LogoutButton() {
     navigate('/login');
   };
 
-  // Mock component - will be replaced with shadcn later
   return (
     <button
       onClick={handleLogout}
