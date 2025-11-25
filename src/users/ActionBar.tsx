@@ -1,21 +1,13 @@
-import ExpandCollapseButton from './ExpandCollapseButton';
-import UserCountText from './UserCountText';
-import AddUserButton from './AddUserButton';
 import type { UserNode } from '../types/users';
+import AddUserButton from './AddUserButton';
+import UserCountText from './UserCountText';
 
 interface ActionBarProps {
   tree: UserNode[];
   totalCount: number;
-  onExpandCollapseAll: () => void;
-  hasExpandedItems: boolean;
 }
 
-function ActionBar({
-  tree,
-  totalCount,
-  onExpandCollapseAll,
-  hasExpandedItems,
-}: ActionBarProps) {
+function ActionBar({ tree, totalCount }: ActionBarProps) {
   const numRootUsers = tree.length;
   const numUsers = totalCount;
 
@@ -30,10 +22,6 @@ function ActionBar({
       }}
     >
       <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
-        <ExpandCollapseButton
-          onExpandCollapseAll={onExpandCollapseAll}
-          hasExpandedItems={hasExpandedItems}
-        />
         <UserCountText numRootUsers={numRootUsers} numUsers={numUsers} />
       </div>
       <AddUserButton />

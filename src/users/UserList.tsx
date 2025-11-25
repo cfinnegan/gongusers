@@ -1,9 +1,15 @@
 import type { UserNode } from '../types/users';
 import UserItem from './UserItem';
 
-const UserList = ({ users }: { users: UserNode[] }) => {
+const UserList = ({
+  users,
+  isRootLevel = false,
+}: {
+  users: UserNode[];
+  isRootLevel?: boolean;
+}) => {
   return (
-    <div style={{ marginLeft: '50px' }}>
+    <div style={isRootLevel ? {} : { marginLeft: '50px' }}>
       {users.map((user) => (
         <UserItem key={user.id} user={user} />
       ))}

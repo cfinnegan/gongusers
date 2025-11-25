@@ -32,23 +32,23 @@ function LoginPage() {
     <div>
       {!user && (
         <>
-          <form onSubmit={handleSubmit}>
-            <input
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              type="email"
-              placeholder="Email"
-            />
-            <input
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              type="password"
-              placeholder="Password"
-            />
-            <button type="submit">Login</button>
-          </form>
+        <form onSubmit={handleSubmit}>
+          <input
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            type="email"
+            placeholder="Email"
+          />
+          <input
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            type="password"
+            placeholder="Password"
+          />
+          <button type="submit">Login</button>
+        </form>
           {attemptedLogin && (
-            <div className="text-red-500 text-sm font-bold">User not found</div>
+        <div className="text-red-500 text-sm font-bold">User not found</div>
           )}
         </>
       )}

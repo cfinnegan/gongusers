@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'react';
+import { useMemo } from 'react';
 import { useUsers } from './UsersContext';
 import { buildTree } from '../../utils/treeBuilder';
 import UserList from './UserList';
@@ -8,12 +8,6 @@ import ActionBar from './ActionBar';
 function UsersPage() {
   const { users } = useUsers();
   const { tree, totalCount } = useMemo(() => buildTree(users), [users]);
-  const [hasExpandedItems, setHasExpandedItems] = useState(false);
-
-  const handleExpandCollapseAll = () => {
-    // TODO: Implement expand/collapse all functionality
-    setHasExpandedItems((prev) => !prev);
-  };
 
   return (
     <div>
@@ -21,13 +15,8 @@ function UsersPage() {
         title="Users"
         description="Browse your team's organisational structure and understand how your company is organised."
       />
-      <ActionBar
-        tree={tree}
-        totalCount={totalCount}
-        onExpandCollapseAll={handleExpandCollapseAll}
-        hasExpandedItems={hasExpandedItems}
-      />
-      <UserList users={tree} />
+      <ActionBar tree={tree} totalCount={totalCount} />
+      <UserList users={tree} isRootLevel={true} />
     </div>
   );
 }
