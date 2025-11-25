@@ -8,13 +8,13 @@ const UserCard = ({ user }: { user: UserNode }) => {
   return (
     <div
       style={{
-        boxShadow: '0 2px 4px rgba(0, 0, 0, 0.1)',
         whiteSpace: 'nowrap',
         overflow: 'hidden',
         textOverflow: 'ellipsis',
         display: 'flex',
         alignItems: 'center',
         gap: '8px',
+        padding: '10px',
       }}
     >
       <ProfileIndicator user={user} />

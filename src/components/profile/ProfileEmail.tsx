@@ -1,4 +1,5 @@
 import type { User } from '../../types/users';
+import { Badge } from '@/components/ui/badge';
 
 function ProfileEmail({
   user,
@@ -7,11 +8,10 @@ function ProfileEmail({
   user: User | null;
   isLight?: boolean;
 }) {
-  // Mock component - will be replaced with shadcn later
   return (
-    <div style={{ fontSize: '14px', color: isLight ? 'white' : 'black' }}>
+    <Badge variant={isLight ? 'secondary' : 'outline'}>
       {user ? `${user.email}` : 'Guest'}
-    </div>
+    </Badge>
   );
 }
 

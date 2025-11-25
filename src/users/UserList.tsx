@@ -5,7 +5,7 @@ const UserList = ({ users }: { users: UserNode[] }) => {
   return (
     <div style={{ marginLeft: '50px' }}>
       {users.map((user) => (
-        <UserItem user={user} />
+        <UserItem key={user.id} user={user} />
       ))}
     </div>
   );
