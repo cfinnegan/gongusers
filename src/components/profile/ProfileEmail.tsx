@@ -9,7 +9,7 @@ function ProfileEmail({
   isLight?: boolean;
 }) {
   return (
-    <Badge variant={isLight ? 'secondary' : 'outline'}>
+    <Badge variant={isLight ? 'secondary' : 'outline'} className="bg-gray-200">
       {user ? `${user.email}` : 'Guest'}
     </Badge>
   );
