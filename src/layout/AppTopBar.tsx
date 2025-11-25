@@ -1,4 +1,4 @@
-import Profile from './Profile';
+import Profile from '../components/profile/Profile';
 import LogoutButton from './LogoutButton';
 import Logo from './Logo';
 import { useAuth } from '../auth/AuthContext';

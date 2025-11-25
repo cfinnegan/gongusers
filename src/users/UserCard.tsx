@@ -1,6 +1,8 @@
 import type { UserNode } from '../types/users';
-import ProfileImage from '../layout/ProfileImage';
-import ProfileName from '../layout/ProfileName';
+import ProfileImage from '../components/profile/ProfileImage';
+import ProfileName from '../components/profile/ProfileName';
+import ProfileEmail from '../components/profile/ProfileEmail';
+import ProfileIndicator from '../components/profile/ProfileIndicator';
 
 const UserCard = ({ user }: { user: UserNode }) => {
   return (
@@ -15,8 +17,10 @@ const UserCard = ({ user }: { user: UserNode }) => {
         gap: '8px',
       }}
     >
+      <ProfileIndicator user={user} />
       <ProfileImage user={user} />
       <ProfileName user={user} />
+      <ProfileEmail user={user} />
     </div>
   );
 };
