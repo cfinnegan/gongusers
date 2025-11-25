@@ -1,8 +1,10 @@
 import Profile from './Profile';
 import LogoutButton from './LogoutButton';
 import Logo from './Logo';
+import { useAuth } from '../auth/AuthContext';
 
 function AppTopBar() {
+  const { user } = useAuth();
   return (
     <div
       style={{
@@ -18,7 +20,7 @@ function AppTopBar() {
     >
       <Logo />
       <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
-        <Profile />
+        <Profile user={user} isLight={true} />
         <LogoutButton />
       </div>
     </div>

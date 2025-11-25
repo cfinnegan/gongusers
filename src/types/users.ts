@@ -5,6 +5,7 @@ export interface User {
   lastName: string;
   password: string;
   managerId?: number | null;
+  photo?: string;
 }
 
 export interface Secrets {

@@ -1,4 +1,6 @@
 import type { UserNode } from '../types/users';
+import ProfileImage from '../layout/ProfileImage';
+import ProfileName from '../layout/ProfileName';
 
 const UserCard = ({ user }: { user: UserNode }) => {
   return (
@@ -8,9 +10,13 @@ const UserCard = ({ user }: { user: UserNode }) => {
         whiteSpace: 'nowrap',
         overflow: 'hidden',
         textOverflow: 'ellipsis',
+        display: 'flex',
+        alignItems: 'center',
+        gap: '8px',
       }}
     >
-      {user.firstName} {user.lastName}
+      <ProfileImage user={user} />
+      <ProfileName user={user} />
     </div>
   );
 };
