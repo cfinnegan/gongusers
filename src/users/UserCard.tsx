@@ -4,6 +4,7 @@ import ProfileName from '../components/profile/ProfileName';
 import ProfileEmail from '../components/profile/ProfileEmail';
 import ProfileIndicator from '../components/profile/ProfileIndicator';
 import MissingManager from '../components/profile/MissingManager';
+import CircularReferenceWarning from '../components/profile/CircularReferenceWarning';
 
 const UserCard = ({ user }: { user: UserNode }) => {
   return (
@@ -23,6 +24,7 @@ const UserCard = ({ user }: { user: UserNode }) => {
       <ProfileName user={user} />
       <ProfileEmail user={user} />
       <MissingManager user={user} />
+      <CircularReferenceWarning user={user} />
     </div>
   );
 };

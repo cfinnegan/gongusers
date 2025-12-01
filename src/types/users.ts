@@ -16,5 +16,6 @@ export type UserNode = User & {
   reports: UserNode[];
   // This property is not required in order to build the tree but it is useful for the UI -
   // it allows us to highlight users with missing managers
-  managerStatus: 'valid' | 'missing' | 'unchecked';
+  managerStatus: 'valid' | 'missing' | 'unchecked' | 'circular';
+  circularManagerId?: number | null;
 };

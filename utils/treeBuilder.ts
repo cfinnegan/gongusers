@@ -19,19 +19,49 @@ export const buildTree = (
     allUserIds.push(user.id);
   }
 
+  // Recursive function to detect circular references (A->B->C->A)
+  const detectCircularReferences = (
+    user: UserNode,
+    path: number[]
+  ): boolean => {
+    if (!user.managerId) {
+      return false;
+    }
+    if (path.includes(user.managerId)) {
+      return true;
+    }
+    path.push(user.managerId);
+    const managerNode = userMap[user.managerId];
+    if (managerNode) {
+      return detectCircularReferences(managerNode, path);
+    }
+    return false;
+  };
+
   // Build the hierarchy
   for (const user of users) {
     const userNode = userMap[user.id];
-    if (user.managerId) {
-      const managerNode = userMap[user.managerId];
-      if (managerNode) {
+    if (userNode.managerId) {
+      const managerNode = userMap[userNode.managerId];
+
+      // Manager not found - treat as root node
+      if (!managerNode) {
+        userNode.managerStatus = 'missing';
+        userTree.push(userNode);
+        continue;
+      }
+
+      // If there is a circular reference, mark the user as circular
+      const isCircular = detectCircularReferences(userNode, [userNode.id]);
+      if (isCircular) {
+        userNode.managerStatus = 'circular';
+        userNode.circularManagerId = userNode.managerId;
+        userNode.managerId = null;
+        userTree.push(userNode);
+      } else {
         // Manager found - add user to manager's reports
         userNode.managerStatus = 'valid';
         managerNode.reports.push(userNode);
-      } else {
-        // Manager not found - treat as root node
-        userNode.managerStatus = 'missing';
-        userTree.push(userNode);
       }
     } else {
       // No manager - legitimate root node
